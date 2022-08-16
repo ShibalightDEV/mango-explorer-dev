@@ -121,7 +121,7 @@ class PerpToSpotHedger(Hedger):
             # When we add the rounded perp position and token balances, we should get zero if we're delta-neutral.
             # If we have a target balance, subtract that to get our targetted delta neutral balance.
             delta: Decimal = (
-                perp_position_rounded + token_balance_rounded - self.target_balance
+                (perp_position_rounded/1000000000.0) + token_balance_rounded - self.target_balance
             )
             self._logger.debug(
                 f"Delta from {self.underlying_market.fully_qualified_symbol} to {self.hedging_market.fully_qualified_symbol} is {delta:,.8f} {basket_token.base_instrument.symbol}, action threshold is: {self.action_threshold}"
